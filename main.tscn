@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/player.gd" type="Script" id=2]
+[ext_resource path="res://scenes/target_cursor/target_cursor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://enemies/alien_ship_1.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/desert_background.png" type="Texture" id=10]
+
+[node name="Main" type="Node2D"]
+
+[node name="Player" type="Node2D" parent="."]
+position = Vector2( 10, 151 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="DesertBackground" type="Sprite" parent="."]
+position = Vector2( 120, 80 )
+texture = ExtResource( 10 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="AlienShip1" parent="." instance=ExtResource( 5 )]
+position = Vector2( 106, 39 )
+qte_difficulty = 3
+
+[node name="AlienShip2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 82, 53 )
+qte_difficulty = 3
+
+[node name="TargetCursor" parent="." instance=ExtResource( 3 )]
+frame = 2

@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/base_enemy/base_enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/alien_ships/alien_ship_1.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4.5, 2 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 9, 4 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ SubResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=4]
+resource_name = "Idle"
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.75, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -15.0, 15.0, 0.0 ]
+}
+
+[node name="AlienShip1" instance=ExtResource( 1 )]
+max_health = 4
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2( -0.5, 0 )
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" parent="." index="1"]
+frames = SubResource( 3 )
+
+[node name="AnimationPlayer" parent="." index="2"]
+anims/Idle = SubResource( 4 )
