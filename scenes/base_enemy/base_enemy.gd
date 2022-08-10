@@ -1,8 +1,6 @@
 extends KinematicBody2D
 class_name BaseEnemy
 
-onready var explosion_scene = preload('res://scenes/base_enemy/explosion.tscn')
-
 export var max_health : int = 10
 export var qte_difficulty: int = 1
 
@@ -64,11 +62,9 @@ func _on_receive_damage_to_health(target: KinematicBody2D, damage: int) -> void:
 
 
 func _on_death() -> void:
-	# Death stuff here. Animation, Sound, etc
-	var explosion = explosion_scene.instance()
-	add_child(explosion)
-	explosion.connect("animation_finished", self, "queue_free")
-	explosion.play("default")
+	Utils.spawn_explosion(global_position)
+	queue_free()
+	pass
 
 
 func _on_selected_target(new_target) -> void:

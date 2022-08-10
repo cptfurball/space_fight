@@ -1,5 +1,8 @@
 extends Node
 
+const EXPLOSION_SCENE: Resource = preload("res://scenes/explosion/explosion.tscn")
+const EXPLOSION_TRAUMA: float = 0.5
+
 
 # Checks if array have the same content by comparing its hash.
 # Each array is sorted before generating the hash.
@@ -34,3 +37,11 @@ func set_pause_node(node : Node, pause : bool) -> void:
 	node.set_process_internal(!pause)
 	node.set_process_unhandled_input(!pause)
 	node.set_process_unhandled_key_input(!pause)
+
+
+func spawn_explosion(spawn_pos: Vector2) -> void:
+	Events.emit_signal("shake_camera", EXPLOSION_TRAUMA)
+	var explosion: AnimatedSprite = EXPLOSION_SCENE.instance()
+	get_tree().current_scene.add_child(explosion)
+	explosion.global_position = spawn_pos
+	explosion.play()

@@ -1,3 +1,4 @@
+# This is not my code. Got it from the internet.
 extends Line2D
 
 export var limited_lifetime := false

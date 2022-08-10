@@ -52,6 +52,7 @@ func _reset_hax_progress() -> void:
 
 
 func _on_selected_target(new_target: BaseEnemy) -> void:
+	$MenuSelect.play()
 	Utils.set_pause_node(self, false)
 	
 	_reset_hax_progress()
