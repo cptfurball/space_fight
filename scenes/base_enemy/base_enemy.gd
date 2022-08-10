@@ -17,7 +17,7 @@ signal target_code_changed(new_code)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$AnimationPlayer.play("Idle")
+#	$AnimationPlayer.play("Idle")
 	add_to_group(Constants.GROUP_ENEMY)
 	_setup_signal_connection()
 	
@@ -38,8 +38,7 @@ func _process(_delta):
 
 
 func _process_check_health():
-	if current_health == 0:
-		emit_signal("death")
+	pass
 
 
 func _input(_event) -> void:
@@ -58,12 +57,18 @@ func _on_mouse_exited() -> void:
 func _on_receive_damage_to_health(target: KinematicBody2D, damage: int) -> void:
 	if target == self:
 		current_health = int(max(current_health - damage, 0))
-		$AnimationPlayer.play("Damage")
+		
+		if current_health == 0:
+			emit_signal("death")
+
 
 
 func _on_death() -> void:
 	# Death stuff here. Animation, Sound, etc
-	queue_free()
+	var explosion = explosion_scene.instance()
+	add_child(explosion)
+	explosion.connect("animation_finished", self, "queue_free")
+	explosion.play("default")
 
 
 func _on_selected_target(new_target) -> void:

@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "BaseEnemy",
 "language": "GDScript",
 "path": "res://scenes/base_enemy/base_enemy.gd"
+}, {
+"base": "Camera2D",
+"class": "ShakeCamera2D",
+"language": "GDScript",
+"path": "res://scripts/camera_shake.gd"
 } ]
 _global_script_class_icons={
-"BaseEnemy": ""
+"BaseEnemy": "",
+"ShakeCamera2D": ""
 }
 
 [application]
