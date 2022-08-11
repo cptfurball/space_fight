@@ -3,10 +3,10 @@ extends AnimatedSprite
 const CURSOR_SMOOTHING : int = 10
 const HIDDEN_COORDS : Vector2 = Vector2(300, 300)
 
-const DAMAGE_MULTIPLIER_MAX_VALUE : float = 50.0
+const DAMAGE_MULTIPLIER_MAX_VALUE : float = 10.0
 const DAMAGE_MULTIPLIER_MIN_VALUE : float = 1.0
-const DAMAGE_MULTIPLIER_LOST_PER_FRAME : float = 0.1
-const DAMAGE_MULTIPLIER_GAIN_PER_PASS : float = 20.0 # Temporary implementation, follow difficulty
+const DAMAGE_MULTIPLIER_LOST_PER_FRAME : float = 0.01
+const DAMAGE_MULTIPLIER_GAIN_PER_PASS : float = 2.0 # Temporary implementation, follow difficulty
 
 onready var qte : Node2D = $QTE
 onready var damage_multiplier_bar : TextureProgress = $DamageMultiplierBar
@@ -79,5 +79,5 @@ func _on_selected_target(new_target: BaseEnemy) -> void:
 
 # Handle event when player passed the QTE challenge.
 func _on_qte_challenge_passed() -> void:
-	_update_damage_multiplier(min(damage_multiplier + DAMAGE_MULTIPLIER_GAIN_PER_PASS, DAMAGE_MULTIPLIER_MAX_VALUE))
 	Events.emit_signal("launch_attack", damage_multiplier)
+	_update_damage_multiplier(min(damage_multiplier + DAMAGE_MULTIPLIER_GAIN_PER_PASS, DAMAGE_MULTIPLIER_MAX_VALUE))

@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 
-export(float, 1, 20, 0.1) var damage: float = 2
+export(float, 1, 100, 0.1) var damage: float = 20
 export(float, 50, 250) var speed: float = 250
 
 var target: Node2D

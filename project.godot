@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "BaseEnemy",
 "language": "GDScript",
-"path": "res://scenes/base_enemy/base_enemy.gd"
+"path": "res://scripts/base_enemy.gd"
 }, {
 "base": "Camera2D",
 "class": "ShakeCamera2D",
