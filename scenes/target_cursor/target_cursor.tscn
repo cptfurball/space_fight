@@ -135,6 +135,7 @@ animations = [ {
 
 [node name="TargetCursor" type="AnimatedSprite"]
 frames = SubResource( 6 )
+frame = 4
 speed_scale = 2.0
 playing = true
 script = ExtResource( 6 )

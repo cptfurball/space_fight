@@ -1,11 +1,12 @@
 extends KinematicBody2D
 
 
+export(float, 1, 20, 0.1) var damage: float = 2
+export(float, 50, 250) var speed: float = 250
+
 var target: Node2D
-var damage: int = 2
 var damage_multiplier: float = 1.0
 
-var speed: float = 100
 var target_dir: Vector2 = Vector2.UP
 var velocity: Vector2
 
@@ -24,11 +25,11 @@ func _process(delta):
 	_process_collision()
 
 
-func launch(current_position: Vector2, new_target: Node2D, new_damage_multiplier: float):
+func launch(current_position: Vector2, new_target: Node2D, new_damage_multiplier: float = 1.0):
 	global_position = current_position
 	target = new_target
 	damage_multiplier = new_damage_multiplier
-	$RandomAudioStreamPlayer2D.play()
+	$LaunchSfx.play()
 
 
 func _process_movement():
@@ -46,7 +47,7 @@ func _process_collision():
 	for i in slides:
 		var collision = get_slide_collision(i)
 		
-		if collision.collider.is_in_group('enemy'):
+		if collision.collider.is_in_group(Constants.GROUP_ENEMY):
 			_collide_with_enemy(collision.collider)
 		
 		break
@@ -56,7 +57,11 @@ func _process_collision():
 
 
 func _collide_with_enemy(collider) -> void:
-	Events.emit_signal('receive_damage', collider, damage * damage_multiplier)
+	Events.emit_signal("receive_damage", collider, damage * damage_multiplier)
+
+
+func _collide_with_player(collider) -> void:
+	Events.emit_signal("receive_damage", collider, damage)
 
 
 func _explode():
