@@ -1,6 +1,6 @@
 extends Node2D
 
-const projectile_scene := preload("res://scenes/base_projectile/base_projectile.tscn")
+const projectile_scene := preload("res://projectiles/missile.tscn")
 
 var target: BaseEnemy 
 

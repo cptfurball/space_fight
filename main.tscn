@@ -39,6 +39,7 @@ max_health = 100.0
 qte_difficulty = 3
 
 [node name="TargetCursor" parent="." instance=ExtResource( 3 )]
+frame = 3
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 120, 80 )

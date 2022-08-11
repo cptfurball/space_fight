@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/base_projectile/base_projectile.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://scenes/trail/trail.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sfx/launches/404754__owlstorm__retro-video-game-sfx-explode.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/sfx/launches/367987__chrisbutler99__launch.wav" type="AudioStream" id=6]
@@ -25,9 +24,7 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 0, 0, 0, 1 )
 scale = Vector2( 0.1, 0.1 )
-texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
