@@ -28,7 +28,7 @@ func _setup_signal_connection() -> void:
 	connect('death', self, '_on_death') # warning-ignore:return_value_discarded
 	
 	Events.connect("selected_target", self, "_on_selected_target") # warning-ignore:return_value_discarded
-	Events.connect("receive_damage_to_health", self, "_on_receive_damage_to_health") # warning-ignore:return_value_discarded
+	Events.connect("receive_damage", self, "_on_receive_damage") # warning-ignore:return_value_discarded
 
 
 func _process(_delta):
@@ -52,7 +52,7 @@ func _on_mouse_exited() -> void:
 	highlighted = false
 
 
-func _on_receive_damage_to_health(target: KinematicBody2D, damage: int) -> void:
+func _on_receive_damage(target: KinematicBody2D, damage: int) -> void:
 	if target == self:
 		current_health = int(max(current_health - damage, 0))
 		
@@ -64,7 +64,6 @@ func _on_receive_damage_to_health(target: KinematicBody2D, damage: int) -> void:
 func _on_death() -> void:
 	Utils.spawn_explosion(global_position)
 	queue_free()
-	pass
 
 
 func _on_selected_target(new_target) -> void:

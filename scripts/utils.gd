@@ -3,6 +3,15 @@ extends Node
 const EXPLOSION_SCENE: Resource = preload("res://scenes/explosion/explosion.tscn")
 const EXPLOSION_TRAUMA: float = 0.5
 
+var window_rect: Rect2
+
+
+func _ready():
+	var width: float = ProjectSettings.get_setting("display/window/size/width")
+	var height: float = ProjectSettings.get_setting("display/window/size/height")
+	
+	window_rect = Rect2(Vector2.ZERO, Vector2(width, height))
+
 
 # Checks if array have the same content by comparing its hash.
 # Each array is sorted before generating the hash.
@@ -39,9 +48,14 @@ func set_pause_node(node : Node, pause : bool) -> void:
 	node.set_process_unhandled_key_input(!pause)
 
 
+# Spawns an explosion at a given position.
 func spawn_explosion(spawn_pos: Vector2) -> void:
 	Events.emit_signal("shake_camera", EXPLOSION_TRAUMA)
 	var explosion: AnimatedSprite = EXPLOSION_SCENE.instance()
 	get_tree().current_scene.add_child(explosion)
 	explosion.global_position = spawn_pos
 	explosion.play()
+
+
+func is_within_window(point: Vector2) -> bool:
+	return window_rect.has_point(point)

@@ -13,6 +13,9 @@ func init(new_target: Node2D):
 
 
 func _process(delta):
+	if not Utils.is_within_window(global_position):
+		_explode()
+		
 	if is_instance_valid(target):
 		var target_pos: Vector2 = target.transform.origin
 		target_dir = transform.origin.direction_to(target_pos)
@@ -24,11 +27,10 @@ func _process(delta):
 			for i in get_slide_count():
 				var collision = get_slide_collision(i)
 				if collision.collider.is_in_group('enemy'):
-					target.emit_signal('receive_damage', damage)
+					Events.emit_signal('receive_damage', collision.collider, damage)
 					Utils.set_pause_node(self, true)
 					break
-			Utils.spawn_explosion(global_position)
-			queue_free()
+			_explode()
 			
 	elif not target_dir == Vector2.ZERO:
 		var velocity: Vector2 = target_dir * speed
@@ -39,10 +41,14 @@ func _process(delta):
 			for i in get_slide_count():
 				var collision = get_slide_collision(i)
 				if collision.collider.is_in_group('enemy'):
-					target.emit_signal('receive_damage', damage)
+					Events.emit_signal('receive_damage', collision.collider, damage)
 					Utils.set_pause_node(self, true)
 					
 					break
 			
-			Utils.spawn_explosion(global_position)
-			queue_free()
+			_explode()
+
+
+func _explode():
+	Utils.spawn_explosion(global_position)
+	queue_free()

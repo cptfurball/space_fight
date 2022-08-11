@@ -37,7 +37,6 @@ position = Vector2( 86, 60 )
 qte_difficulty = 3
 
 [node name="TargetCursor" parent="." instance=ExtResource( 3 )]
-frame = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 120, 80 )

@@ -135,11 +135,12 @@ animations = [ {
 
 [node name="TargetCursor" type="AnimatedSprite"]
 frames = SubResource( 6 )
+frame = 4
 speed_scale = 2.0
 playing = true
 script = ExtResource( 6 )
 
-[node name="HP" type="TextureProgress" parent="."]
+[node name="HealthBar" type="TextureProgress" parent="."]
 anchor_left = -0.09375
 anchor_top = 0.03125
 anchor_right = -0.0625
@@ -156,15 +157,15 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="HaxProgress" type="TextureProgress" parent="."]
+[node name="DamageMultiplierBar" type="TextureProgress" parent="."]
 anchor_left = 0.03125
-anchor_top = 1.03125
+anchor_top = 1.0625
 anchor_right = 0.96875
-anchor_bottom = 1.0625
+anchor_bottom = 1.09375
 margin_left = -16.0
 margin_top = -16.0
-margin_right = 14.0
-margin_bottom = -15.0
+margin_right = -16.0
+margin_bottom = -16.0
 step = 0.1
 value = 100.0
 texture_progress = ExtResource( 5 )
@@ -176,32 +177,36 @@ __meta__ = {
 script = ExtResource( 7 )
 
 [node name="key_a" type="AnimatedSprite" parent="QTE"]
-position = Vector2( -6, 21 )
+position = Vector2( -9, 21 )
 frames = SubResource( 28 )
 animation = "empty"
 speed_scale = 2.0
 playing = true
+centered = false
 
 [node name="key_s" type="AnimatedSprite" parent="QTE"]
-position = Vector2( -2, 21 )
+position = Vector2( -4, 21 )
 frames = SubResource( 28 )
 animation = "empty"
 speed_scale = 2.0
 playing = true
+centered = false
 
 [node name="key_d" type="AnimatedSprite" parent="QTE"]
-position = Vector2( 3, 21 )
+position = Vector2( 1, 21 )
 frames = SubResource( 28 )
 animation = "empty"
 speed_scale = 2.0
 playing = true
+centered = false
 
 [node name="key_f" type="AnimatedSprite" parent="QTE"]
-position = Vector2( 7, 21 )
+position = Vector2( 6, 21 )
 frames = SubResource( 28 )
 animation = "empty"
 speed_scale = 2.0
 playing = true
+centered = false
 
-[node name="MenuSelect" type="AudioStreamPlayer2D" parent="."]
+[node name="TargetSelectSfx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )

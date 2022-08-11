@@ -9,20 +9,28 @@ signal qte_challenge_passed
 
 
 # Generates the qte combo.
-func generate_qte_code() -> void:
+func generate_qte_combo() -> void:
+	var new_qte_combo = _generate_qte_combo()
+	new_qte_combo.sort()
+	
+	while Utils.array_has_same_content(new_qte_combo, qte_combo):
+		new_qte_combo = _generate_qte_combo()
+		new_qte_combo.sort()
+	
+	qte_combo = new_qte_combo
+	emit_signal("qte_combo_changed", qte_combo)
+
+
+func _generate_qte_combo() -> Array:
 	var qte_combo_length = Utils.generate_random_int(
 		Constants.QTE_COMBO_MIN_LENGTH, 
 		Constants.QTE_COMBO_MAX_LENGTH
 	)
 	
-	qte_combo = Utils.generate_random_combo(
+	return Utils.generate_random_combo(
 		Constants.QTE_COMBO_KEY_LIST, 
 		qte_combo_length
 	)
-	
-	qte_combo.sort()
-	
-	emit_signal("qte_combo_changed", qte_combo)
 
 
 # Runs on every frame.
@@ -37,7 +45,7 @@ func _process(_delta) -> void:
 func _process_qte_challenge() -> void:
 	if qte_combo.size() and Utils.array_has_same_content(player_input, qte_combo):
 		emit_signal("qte_challenge_passed")
-		generate_qte_code()
+		generate_qte_combo()
 
 
 # Processes the input from the player and store it.
