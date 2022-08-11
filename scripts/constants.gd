@@ -20,11 +20,5 @@ const QTE_COMBO_KEY_LIST: Array = [
 const QTE_COMBO_MAX_LENGTH: int = 4
 const QTE_COMBO_MIN_LENGTH: int = 1
 
-const QTE_DIFFICULTY_TIMEOUT: Array = [
-	4.0,
-	3.0,
-	2.0,
-	1.0
-]
-
 const GROUP_ENEMY: String = 'enemy'
+const GROUP_PROJECTILE: String = 'projectile'

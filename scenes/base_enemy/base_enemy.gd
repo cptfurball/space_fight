@@ -1,10 +1,10 @@
 extends KinematicBody2D
 class_name BaseEnemy
 
-export var max_health : int = 10
+export var max_health : float = 100
 export var qte_difficulty: int = 1
 
-var current_health : int = 0
+var health : float = 0
 var highlighted: bool = false
 var selected: bool = false
 
@@ -15,11 +15,10 @@ signal target_code_changed(new_code)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-#	$AnimationPlayer.play("Idle")
 	add_to_group(Constants.GROUP_ENEMY)
 	_setup_signal_connection()
 	
-	current_health = max_health
+	health = max_health
 
 
 func _setup_signal_connection() -> void:
@@ -54,11 +53,10 @@ func _on_mouse_exited() -> void:
 
 func _on_receive_damage(target: KinematicBody2D, damage: int) -> void:
 	if target == self:
-		current_health = int(max(current_health - damage, 0))
+		health = int(max(health - damage, 0))
 		
-		if current_health == 0:
+		if health == 0:
 			emit_signal("death")
-
 
 
 func _on_death() -> void:

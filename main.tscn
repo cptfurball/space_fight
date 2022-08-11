@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/camera_shake.gd" type="Script" id=1]
-[ext_resource path="res://scripts/player.gd" type="Script" id=2]
+[ext_resource path="res://scripts/launcher.gd" type="Script" id=2]
 [ext_resource path="res://scenes/target_cursor/target_cursor.tscn" type="PackedScene" id=3]
 [ext_resource path="res://main.gd" type="Script" id=4]
 [ext_resource path="res://enemies/alien_ship_1.tscn" type="PackedScene" id=5]
@@ -11,7 +11,7 @@
 [node name="Main" type="Node2D"]
 script = ExtResource( 4 )
 
-[node name="Player" type="Node2D" parent="."]
+[node name="Launcher" type="Node2D" parent="."]
 position = Vector2( 10, 151 )
 script = ExtResource( 2 )
 __meta__ = {
@@ -30,10 +30,12 @@ layer = 0
 
 [node name="AlienShip1" parent="." instance=ExtResource( 5 )]
 position = Vector2( 106, 39 )
+max_health = 100.0
 qte_difficulty = 3
 
 [node name="AlienShip2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 86, 60 )
+max_health = 100.0
 qte_difficulty = 3
 
 [node name="TargetCursor" parent="." instance=ExtResource( 3 )]

@@ -3,11 +3,10 @@ extends AnimatedSprite
 const CURSOR_SMOOTHING : int = 10
 const HIDDEN_COORDS : Vector2 = Vector2(300, 300)
 
-const DAMAGE_MULTIPLIER_MAX_VALUE : float = 100.0
-const DAMAGE_MULTIPLIER_MIN_VALUE : float = 0.0
-const DAMAGE_MULTIPLIER_LOST_PER_FRAME : float = 0.5
+const DAMAGE_MULTIPLIER_MAX_VALUE : float = 50.0
+const DAMAGE_MULTIPLIER_MIN_VALUE : float = 1.0
+const DAMAGE_MULTIPLIER_LOST_PER_FRAME : float = 0.1
 const DAMAGE_MULTIPLIER_GAIN_PER_PASS : float = 20.0 # Temporary implementation, follow difficulty
-
 
 onready var qte : Node2D = $QTE
 onready var damage_multiplier_bar : TextureProgress = $DamageMultiplierBar
@@ -37,7 +36,7 @@ func _process(delta) -> void:
 func _process_update_cursor(delta) -> void:
 	visible = true
 	transform.origin = transform.origin.linear_interpolate(target.transform.origin, delta * CURSOR_SMOOTHING)
-	health_bar.value = target.current_health
+	health_bar.value = target.health
 	
 	_update_damage_multiplier(max(damage_multiplier - DAMAGE_MULTIPLIER_LOST_PER_FRAME, DAMAGE_MULTIPLIER_MIN_VALUE))
 
