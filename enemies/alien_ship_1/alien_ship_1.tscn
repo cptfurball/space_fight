@@ -63,11 +63,12 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.25, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, 2 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, -3 ), Vector2( 0, 0 ) ]
 }
 
 [node name="AlienShip1" type="KinematicBody2D"]
 z_index = 1
+collision_layer = 5
 input_pickable = true
 script = ExtResource( 1 )
 
@@ -82,3 +83,12 @@ frames = SubResource( 4 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
 anims/Idle = SubResource( 6 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 0, 11 )
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

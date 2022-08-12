@@ -6,8 +6,9 @@
 [ext_resource path="res://assets/sfx/launches/367987__chrisbutler99__launch.wav" type="AudioStream" id=6]
 [ext_resource path="res://addons/randomAudioStreamPlayer/random_audio_stream_player.gd" type="Script" id=7]
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 3, 3 )
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 3.0
+height = 6.0
 
 [sub_resource type="Curve" id=4]
 min_value = 0.99
@@ -24,10 +25,9 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.1, 0.1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+shape = SubResource( 5 )
 
 [node name="Trail" parent="." instance=ExtResource( 3 )]
 width = 2.0

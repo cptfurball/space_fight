@@ -3,11 +3,11 @@ extends KinematicBody2D
 
 export(float, 1, 100, 0.1) var damage: float = 20
 export(float, 50, 250) var speed: float = 250
+export(Vector2) var target_dir: Vector2 = Vector2.UP
 
 var target: Node2D
 var damage_multiplier: float = 1.0
 
-var target_dir: Vector2 = Vector2.UP
 var velocity: Vector2
 
 
@@ -22,6 +22,7 @@ func _process(delta):
 	$Trail.add_point(global_position)
 	
 	_process_movement()
+	_process_rotation()
 	_process_collision()
 
 
@@ -30,6 +31,17 @@ func launch(current_position: Vector2, new_target: Node2D, new_damage_multiplier
 	target = new_target
 	damage_multiplier = new_damage_multiplier
 	$LaunchSfx.play()
+
+
+func launch_at_dir(current_position: Vector2, dir: Vector2, new_damage_multiplier: float = 1.0):
+	global_position = current_position
+	target_dir = dir
+	damage_multiplier = new_damage_multiplier
+	$LaunchSfx.play()
+
+
+func _process_rotation():
+	rotation_degrees = rad2deg(Vector2.UP.angle_to(target_dir))
 
 
 func _process_movement():
@@ -46,7 +58,6 @@ func _process_collision():
 	
 	for i in slides:
 		var collision = get_slide_collision(i)
-		
 		if collision.collider.is_in_group(Constants.GROUP_ENEMY):
 			_collide_with_enemy(collision.collider)
 		

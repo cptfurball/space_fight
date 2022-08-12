@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/base_projectile/base_projectile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/energy_orb.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 5.0
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.561404, 0.887719, 0.996491 )
+colors = PoolColorArray( 0, 0, 0, 0, 0, 0, 0, 0.803922, 0.191658, 0.925926, 0.943548, 0.988931, 0.621094, 0.973358, 1, 1 )
+
+[node name="EnergyOrb" instance=ExtResource( 1 )]
+collision_layer = 8
+collision_mask = 2
+damage = 10.0
+speed = 50.0
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 1 )
+
+[node name="Trail" parent="." index="2"]
+gradient_col = SubResource( 2 )

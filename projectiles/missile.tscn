@@ -1,10 +1,20 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/base_projectile/base_projectile.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/missile.png" type="Texture" id=2]
 
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.561404, 0.887719, 0.996491 )
+colors = PoolColorArray( 0, 0, 0, 0, 0, 0, 0, 0.803922, 0.943548, 0.561729, 0.191658, 0.988931, 0.933594, 0.902111, 0.871597, 1 )
+
 [node name="Missile" instance=ExtResource( 1 )]
+collision_layer = 8
+collision_mask = 4
 speed = 150.0
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
+
+[node name="Trail" parent="." index="2"]
+points = PoolVector2Array( 0, 4 )
+gradient_col = SubResource( 1 )
