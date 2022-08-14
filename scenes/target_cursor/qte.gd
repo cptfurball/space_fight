@@ -33,20 +33,33 @@ func _generate_qte_combo() -> Array:
 	)
 
 
+func _ready() -> void:
+	$"../AnimationPlayer".connect("animation_finished", self, "_challenge_passed")
+
+
 # Runs on every frame.
 # Process should only run if there is any target selected.
 func _process(_delta) -> void:
 	_update_qte_sprite()
 	_update_player_input()
-	_process_qte_challenge()
+	
+	if not $"../AnimationPlayer".is_playing():
+		_process_qte_challenge()
 
 
 # Checks whether the player passed the qte challenge.
 func _process_qte_challenge() -> void:
 	if qte_combo.size() and Utils.array_has_same_content(player_input, qte_combo):
+		$"../Timer".stop()
+		$"../AnimationPlayer".play("challenge_passed")
+
+
+func _challenge_passed(anim) -> void :
+	if anim == "challenge_passed":
 		emit_signal("qte_challenge_passed")
-		$"../Timer".start(1)
-		generate_qte_combo()
+		
+	generate_qte_combo()
+	$"../Timer".start(1)
 
 
 # Processes the input from the player and store it.
@@ -72,5 +85,6 @@ func _update_qte_sprite() -> void:
 
 
 func _on_Timer_timeout():
-	generate_qte_combo()
+	$"../Timer".stop()
+	$"../AnimationPlayer".play("challenge_failed")
 	pass # Replace with function body.

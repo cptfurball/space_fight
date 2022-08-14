@@ -71,6 +71,8 @@ z_index = 1
 collision_layer = 5
 input_pickable = true
 script = ExtResource( 1 )
+attack_interval_max = 3.0
+attack_interval_min = 6.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708

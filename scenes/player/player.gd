@@ -24,9 +24,17 @@ func _process(_delta) -> void:
 		and Input.is_action_pressed("force_field_q")
 		and Input.is_action_pressed("force_field_w")
 		and Input.is_action_pressed("force_field_r")):
+			
+		if is_force_field_enabled != true:
+			$OnShield.play()
+		
 		is_force_field_enabled = true
 	else:
+		if is_force_field_enabled != false:
+			$OffShield.play()
+		
 		is_force_field_enabled = false
+		
 	
 	_modulate_sprite_color(_delta)
 
@@ -36,9 +44,10 @@ func _modulate_sprite_color(delta):
 		
 		if force_field_modulate_hue > 1.0:
 			force_field_modulate_hue = 0.0
-		
-		$Sprite.modulate = Color.white.from_hsv(force_field_modulate_hue, 1.0, 1.0)
+		$Sprite2.visible = true
+		$Sprite2.modulate = Color.white.from_hsv(force_field_modulate_hue, 1.0, 1.0)
 	else:
+		$Sprite2.visible = false
 		$Sprite.modulate = Color.white
 	
 
@@ -49,7 +58,6 @@ func _setup_signal_connection() -> void:
 
 
 func _on_receive_damage(target: KinematicBody2D, damage: int) -> void:
-	print(target)
 	if target == self and not is_force_field_enabled:
 		health = int(max(health - damage, 0))
 		

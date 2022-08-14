@@ -1,0 +1,121 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://assets/ui/life_bar_container.png" type="Texture" id=1]
+[ext_resource path="res://levels/level3/level_3.gd" type="Script" id=2]
+[ext_resource path="res://scenes/player/player_health.gd" type="Script" id=3]
+[ext_resource path="res://scripts/camera_shake.gd" type="Script" id=4]
+[ext_resource path="res://assets/ui/life_bar.png" type="Texture" id=5]
+[ext_resource path="res://assets/desert_background.png" type="Texture" id=6]
+[ext_resource path="res://assets/sfx/Interlude - Elevator Cruise.wav" type="AudioStream" id=7]
+[ext_resource path="res://enemies/alien_ship_5/alien_ship_5.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/target_cursor/target_cursor.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/enemy_path/enemy_path.tscn" type="PackedScene" id=11]
+[ext_resource path="res://default_theme.tres" type="Theme" id=12]
+[ext_resource path="res://enemies/alien_ship_4/alien_ship_4.tscn" type="PackedScene" id=13]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 11, 14, 0, 0, 0, 0, 218, 16, 0, 0, 0, 0, 114, 31, 0, 0, 0, 0, 11, 14 )
+}
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="AlienShip3" parent="Enemies" instance=ExtResource( 8 )]
+position = Vector2( 11, 14 )
+
+[node name="AlienShip4" parent="Enemies" instance=ExtResource( 13 )]
+position = Vector2( 131, 50 )
+
+[node name="DesertBackground" type="Sprite" parent="."]
+position = Vector2( 120, 80 )
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PlayerHealth" type="TextureProgress" parent="."]
+margin_left = 235.0
+margin_right = 240.0
+margin_bottom = 160.0
+texture_over = ExtResource( 1 )
+texture_progress = ExtResource( 5 )
+fill_mode = 3
+script = ExtResource( 3 )
+
+[node name="TargetCursor" parent="." instance=ExtResource( 9 )]
+position = Vector2( -28, -1 )
+frame = 2
+target_container_node_path = NodePath("../Enemies")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 120, 80 )
+current = true
+script = ExtResource( 4 )
+
+[node name="Bgm" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = 10.524
+autoplay = true
+
+[node name="Player" parent="." instance=ExtResource( 10 )]
+position = Vector2( 183, 150 )
+
+[node name="Path2D" parent="." instance=ExtResource( 11 )]
+
+[node name="PathFollow2D" parent="Path2D" index="0"]
+position = Vector2( 131, 50 )
+
+[node name="RemoteTransform2D" parent="Path2D/PathFollow2D" index="0"]
+remote_path = NodePath("../../../Enemies/AlienShip4")
+
+[node name="Path2D2" parent="." instance=ExtResource( 11 )]
+curve = SubResource( 1 )
+
+[node name="PathFollow2D" parent="Path2D2" index="0"]
+position = Vector2( 11, 14 )
+
+[node name="RemoteTransform2D" parent="Path2D2/PathFollow2D" index="0"]
+remote_path = NodePath("../../../Enemies/AlienShip3")
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="WinTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="Win" type="Control" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+theme = ExtResource( 12 )
+
+[node name="Label" type="Label" parent="Win"]
+margin_left = 75.0
+margin_top = 73.0
+margin_right = 165.0
+margin_bottom = 87.0
+text = "Level Complete!"
+align = 1
+
+[node name="Start" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+theme = ExtResource( 12 )
+
+[node name="Label" type="Label" parent="Start"]
+margin_left = 70.0
+margin_top = 71.0
+margin_right = 172.0
+margin_bottom = 85.0
+text = "Level 3.. Start!"
+align = 1
+
+[connection signal="timeout" from="StartTimer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="WinTimer" to="." method="_on_WinTimer_timeout"]
+
+[editable path="Path2D"]
+[editable path="Path2D2"]

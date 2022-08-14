@@ -18,6 +18,7 @@ func _on_Timer_timeout():
 	#	missile.launch_at_dir($Position2D.global_position, Vector2.DOWN)
 		get_tree().current_scene.add_child(missile)
 
+
 func _reset_attack_timer(target, b):
 	if target == self:
 		$Timer.start()
