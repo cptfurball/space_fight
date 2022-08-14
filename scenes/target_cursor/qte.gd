@@ -45,6 +45,7 @@ func _process(_delta) -> void:
 func _process_qte_challenge() -> void:
 	if qte_combo.size() and Utils.array_has_same_content(player_input, qte_combo):
 		emit_signal("qte_challenge_passed")
+		$"../Timer".start(1)
 		generate_qte_combo()
 
 
@@ -68,3 +69,8 @@ func _update_qte_sprite() -> void:
 			get_node(key).play("default")
 		else:
 			get_node(key).play("empty")
+
+
+func _on_Timer_timeout():
+	generate_qte_combo()
+	pass # Replace with function body.

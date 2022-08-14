@@ -1,7 +1,7 @@
 extends Node
 
 const EXPLOSION_SCENE: Resource = preload("res://scenes/explosion/explosion.tscn")
-const EXPLOSION_TRAUMA: float = 0.5
+const EXPLOSION_TRAUMA: float = 0.2
 
 var window_rect: Rect2
 
@@ -59,3 +59,7 @@ func spawn_explosion(spawn_pos: Vector2) -> void:
 
 func is_within_window(point: Vector2) -> bool:
 	return window_rect.has_point(point)
+
+
+func get_player_node():
+	return get_tree().current_scene.get_node_or_null("Player")

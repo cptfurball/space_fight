@@ -21,4 +21,5 @@ const QTE_COMBO_MAX_LENGTH: int = 4
 const QTE_COMBO_MIN_LENGTH: int = 1
 
 const GROUP_ENEMY: String = 'enemy'
+const GROUP_PLAYER: String = 'player'
 const GROUP_PROJECTILE: String = 'projectile'

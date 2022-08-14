@@ -135,6 +135,7 @@ animations = [ {
 
 [node name="TargetCursor" type="AnimatedSprite"]
 frames = SubResource( 6 )
+frame = 4
 speed_scale = 2.0
 playing = true
 script = ExtResource( 6 )
@@ -209,3 +210,8 @@ centered = false
 
 [node name="TargetSelectSfx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="QTE" method="_on_Timer_timeout"]

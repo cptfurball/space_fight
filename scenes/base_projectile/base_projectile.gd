@@ -60,7 +60,8 @@ func _process_collision():
 		var collision = get_slide_collision(i)
 		if collision.collider.is_in_group(Constants.GROUP_ENEMY):
 			_collide_with_enemy(collision.collider)
-		
+		if collision.collider.is_in_group(Constants.GROUP_PLAYER):
+			_collide_with_player(collision.collider)
 		break
 	
 	if slides > 0:

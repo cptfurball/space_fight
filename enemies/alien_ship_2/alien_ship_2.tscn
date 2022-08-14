@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://enemies/alien_ship_1/alien_ship_1.gd" type="Script" id=1]
-[ext_resource path="res://assets/alien_ships/alien_ship_1.png" type="Texture" id=2]
+[ext_resource path="res://enemies/alien_ship_2/alien_ship_2.gd" type="Script" id=1]
+[ext_resource path="res://assets/alien_ships/alien_ship_2.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape2D" id=5]
 radius = 3.99999
@@ -24,13 +24,13 @@ shader = SubResource( 1 )
 shader_param/flash_color = Color( 1, 1, 1, 1 )
 shader_param/flash_modifier = 0.0
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 9, 4 )
+region = Rect2( 0, 0, 11, 8 )
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ SubResource( 3 ) ],
+"frames": [ SubResource( 7 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -66,11 +66,12 @@ tracks/1/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, -3 ), Vector2( 0, 0 ) ]
 }
 
-[node name="AlienShip1" type="KinematicBody2D"]
+[node name="AlienShip2" type="KinematicBody2D"]
 z_index = 1
 collision_layer = 5
 input_pickable = true
 script = ExtResource( 1 )
+max_health = 150.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -85,7 +86,7 @@ autoplay = "Idle"
 anims/Idle = SubResource( 6 )
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 5.0
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
