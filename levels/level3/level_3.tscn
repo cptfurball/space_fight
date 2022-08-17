@@ -5,8 +5,8 @@
 [ext_resource path="res://scenes/player/player_health.gd" type="Script" id=3]
 [ext_resource path="res://scripts/camera_shake.gd" type="Script" id=4]
 [ext_resource path="res://assets/ui/life_bar.png" type="Texture" id=5]
-[ext_resource path="res://assets/desert_background.png" type="Texture" id=6]
-[ext_resource path="res://assets/sfx/Interlude - Elevator Cruise.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/city_background.png" type="Texture" id=6]
+[ext_resource path="res://assets/sfx/Lightspeed.wav" type="AudioStream" id=7]
 [ext_resource path="res://enemies/alien_ship_5/alien_ship_5.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/target_cursor/target_cursor.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=10]
@@ -28,7 +28,7 @@ script = ExtResource( 2 )
 position = Vector2( 11, 14 )
 
 [node name="AlienShip4" parent="Enemies" instance=ExtResource( 13 )]
-position = Vector2( 131, 50 )
+position = Vector2( 140, 25 )
 
 [node name="DesertBackground" type="Sprite" parent="."]
 position = Vector2( 120, 80 )
@@ -48,7 +48,7 @@ script = ExtResource( 3 )
 
 [node name="TargetCursor" parent="." instance=ExtResource( 9 )]
 position = Vector2( -28, -1 )
-frame = 2
+frame = 0
 target_container_node_path = NodePath("../Enemies")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -65,9 +65,6 @@ autoplay = true
 position = Vector2( 183, 150 )
 
 [node name="Path2D" parent="." instance=ExtResource( 11 )]
-
-[node name="PathFollow2D" parent="Path2D" index="0"]
-position = Vector2( 131, 50 )
 
 [node name="RemoteTransform2D" parent="Path2D/PathFollow2D" index="0"]
 remote_path = NodePath("../../../Enemies/AlienShip4")

@@ -24,7 +24,7 @@ func _process(delta):
 
 
 func _return_to_main_menu():
-	get_tree().change_scene("res://levels/main_menu.tscn")
+	get_tree().change_scene("res://levels/death.tscn")
 
 
 func _on_Timer_timeout():
