@@ -32,7 +32,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Space Fight"
+config/name="QTE Alien Fighter"
 run/main_scene="res://levels/main_menu.tscn"
 config/icon="res://icon.png"
 
